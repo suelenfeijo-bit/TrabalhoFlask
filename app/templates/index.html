@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marketplace</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('product.marketplace') }}">Marketplace</a>
+    {% if session.get('role') == 'admin' %}
+    <a class="btn btn-light btn-sm" href="{{ url_for('product.add_product') }}">+ Produto</a>
+    {% endif %}
+    {% if session.get('role') == 'client' %}
+    <a class="btn btn-warning btn-sm" href="{{ url_for('cart.view_cart') }}">Carrinho</a>
+    {% endif %}
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <h1 class="mb-4">Produtos</h1>
+  <div class="row">
+    {% for p in products %}
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ p.name }}</h5>
+          <p class="card-text">{{ p.description }}</p>
+          <h6 class="text-success">R$ {{ "%.2f"|format(p.price_cents / 100) }}</h6>
+          {% if session.get('role') == 'client' %}
+          <a href="{{ url_for('cart.add_to_cart', product_id=p.id) }}" class="btn btn-success">Adicionar ao carrinho</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% if not products %}
+  <p class="text-muted">Nenhum produto cadastrado ainda.</p>
+  {% endif %}
+</div>
+
+</body>
+</html>

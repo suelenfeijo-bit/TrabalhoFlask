@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pedidos</title>
+</head>
+<body>
+    <h1>Lista de Pedidos</h1>
+    <ul>
+        {% for order in orders %}
+            <li>
+                Pedido #{{ order.id }} - Total R$ {{ "%.2f"|format(order.total_cents / 100) }} - 
+                Criado em {{ order.created_at }}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Voltar</a>
+</body>
+</html>

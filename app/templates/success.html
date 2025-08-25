@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compra Realizada</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="/">Marketplace</a>
+  </div>
+</nav>
+
+<div class="container mt-4">
+<div class="alert alert-success p-4 shadow-sm">
+  <h4>Compra realizada com sucesso!</h4>
+  <p>Pedido #{{ order.id }}</p>
+  <p>Total: R$ {{ "%.2f"|format(order.total_cents / 100) }}</p>
+  <p>Status do pagamento: Pago </p>
+  <a href="/" class="btn btn-primary mt-3">Voltar para acesso</a>
+</div>
+</div>
+
+</body>
+</html>
